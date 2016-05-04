@@ -6,6 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 /**
+ * Sql执行类
  * Created by dell on 2016/5/4.
  */
 public class ExeSQL {
@@ -13,6 +14,7 @@ public class ExeSQL {
     private PreparedStatement statement = null;
     private ResultSet rs = null;
 
+   // 连接到数据库
    public void connSQL() {
         String url = "jdbc:mysql://localhost:3306/e-schoolbag";
         String username = "root";
@@ -45,6 +47,7 @@ public class ExeSQL {
         }
     }
 
+    //返回所有用户的list
     public ArrayList<User> GetUserList(){
         String sql;
         sql = "select * from user";
@@ -71,6 +74,7 @@ public class ExeSQL {
         return UserList;
     }
 
+    //登录验证函数
     public boolean Login(String uid,String psd){
         String sql;
         sql = "select psd from user WHERE id='"+uid+"'";
@@ -90,6 +94,30 @@ public class ExeSQL {
         return false;
     }
 
+    //通过id找到对应user
+    public User GetUserByid(String uid){
+        String sql;
+        sql="SELECT * FROM user WHERE id='"+uid+"'";
+        rs = selectSQL(sql);
+        User user = new User();
+        try {
+            while(rs.next()){
+            user.setId(rs.getString("id"));
+            user.setName(rs.getString("name"));
+            user.setType(rs.getInt("type"));
+            user.setProfile(rs.getString("profile"));
+            }
+        }catch (SQLException e) {
+            System.out.println("显示时数据库出错。");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("显示出错。");
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    //查
     ResultSet selectSQL(String sql) {
         ResultSet r1 = null;
         try {
@@ -100,7 +128,7 @@ public class ExeSQL {
         }
         return r1;
     }
-
+    //改
     boolean updateSQL(String sql) {
         try {
             statement = conn.prepareStatement(sql);
@@ -116,6 +144,7 @@ public class ExeSQL {
         return false;
     }
 
+    //删
     boolean deleteSQL(String sql) {
         try {
             statement = conn.prepareStatement(sql);
@@ -130,6 +159,8 @@ public class ExeSQL {
         }
         return false;
     }
+
+    //增
     boolean insertSQL(String sql) {
         try {
             statement = conn.prepareStatement(sql);

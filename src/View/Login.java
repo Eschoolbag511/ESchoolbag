@@ -1,6 +1,7 @@
 package View;
 
 import Controller.ExeSQL;
+import Model.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by dell on 2016/5/4.
+ * 登录界面窗口 鼠标点击事件为登录验证用户名密码
  */
 public class Login extends JFrame {
     public Login(){
@@ -66,14 +68,17 @@ public class Login extends JFrame {
         this.setResizable(false);
         this.setLocationRelativeTo(null);
 
-        jb1.addActionListener(new ActionListener() {
+        jb1.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 if(sql1.Login(jt_name.getText(),jt_pass1.getText())){
                     System.out.println("登录成功");
+                    User user=sql1.GetUserByid(jt_name.getText());
+                    FirstPage page1  = new FirstPage(user);
+                    setVisible(false);
                 }
                 else {
-                    System.out.println("error");
+                    System.out.println("登录失败");
                 }
             }
         });
