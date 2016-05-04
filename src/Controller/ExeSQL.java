@@ -53,12 +53,12 @@ public class ExeSQL {
         User user = new User();
         try {
             while (rs.next()) {
-            user.setId(rs.getString("id"));
-            user.setName(rs.getString("name"));
-            user.setPsd(rs.getString("psd"));
-            user.setProfile(rs.getInt("type"));
-            user.setType(rs.getInt("type"));
-            UserList.add(user);
+                user.setId(rs.getString("id"));
+                user.setName(rs.getString("name"));
+                user.setPsd(rs.getString("psd"));
+                user.setType(rs.getInt("type"));
+                user.setProfile(rs.getString("profile"));
+                UserList.add(user);
             }
         } catch (SQLException e) {
             System.out.println("显示时数据库出错。");
@@ -81,4 +81,49 @@ public class ExeSQL {
         }
         return r1;
     }
+
+    boolean updateSQL(String sql) {
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("插入数据库时出错");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("插入时出错：");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    boolean deleteSQL(String sql) {
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("插入数据库时出错");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("插入时出错");
+            e.printStackTrace();
+        }
+        return false;
+    }
+    boolean insertSQL(String sql) {
+        try {
+            statement = conn.prepareStatement(sql);
+            statement.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("插入数据库时出错：");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("插入时出错：");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

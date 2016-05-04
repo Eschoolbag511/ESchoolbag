@@ -12,7 +12,15 @@ public class User {
 
     private int type;
 
-    private int profile;
+    private String profile;
+    public String getProfile() {
+        return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
+    }
+
 
     public String getId() {
         return id;
@@ -46,12 +54,6 @@ public class User {
         this.type = type;
     }
 
-    public int getProfile() {
-        return profile;
-    }
 
-    public void setProfile(int profile) {
-        this.profile = profile;
-    }
 
 }

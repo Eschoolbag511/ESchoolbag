@@ -1,0 +1,9 @@
+user
+id 邮箱或者是手机号
+name 昵称而非真实姓名 是要显示在导航的
+psd 密码
+type 用户类型 0为 普通用户 1为老师 2为管理员
+profile 外键 简历表
+
+profile
+id 与user 表中id 对应
