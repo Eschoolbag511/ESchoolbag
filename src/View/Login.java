@@ -1,13 +1,19 @@
 package View;
 
+import Controller.ExeSQL;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by dell on 2016/5/4.
  */
 public class Login extends JFrame {
     public Login(){
+        ExeSQL sql1=new ExeSQL();
+        sql1.connSQL();
         this.setTitle("ESchoolbag");
         JLabel jl = new JLabel("ESchoolbag",SwingUtilities.CENTER);
         Font font = new Font("幼圆",Font.BOLD,24);
@@ -43,8 +49,8 @@ public class Login extends JFrame {
         jp_center.add(jp_center_left);
         jp_center.add(jp_center_right);
 
-        JButton jb1 = new JButton("确认");
-        JButton jb2 = new JButton("返回");
+        JButton jb1 = new JButton("登录");
+        JButton jb2 = new JButton("注册");
 
         JPanel jp_south = new JPanel();
         jp_south.add(jb1);
@@ -59,5 +65,18 @@ public class Login extends JFrame {
         this.setSize(370, 280);
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+
+        jb1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(sql1.Login(jt_name.getText(),jt_pass1.getText())){
+                    System.out.println("登录成功");
+                }
+                else {
+                    System.out.println("error");
+                }
+            }
+        });
     }
+
 }

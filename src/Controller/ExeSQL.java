@@ -13,7 +13,7 @@ public class ExeSQL {
     private PreparedStatement statement = null;
     private ResultSet rs = null;
 
-    void connSQL() {
+   public void connSQL() {
         String url = "jdbc:mysql://localhost:3306/e-schoolbag";
         String username = "root";
         String password = ""; // 加载驱动程序以连接数据库
@@ -69,6 +69,25 @@ public class ExeSQL {
         }
 
         return UserList;
+    }
+
+    public boolean Login(String uid,String psd){
+        String sql;
+        sql = "select psd from user WHERE id='"+uid+"'";
+        rs = selectSQL(sql);
+        try{
+            while (rs.next()){
+                if (psd.equals(rs.getString("psd")))
+                    return true;
+            }
+        } catch (SQLException e) {
+            System.out.println("显示时数据库出错。");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("显示出错。");
+            e.printStackTrace();
+        }
+        return false;
     }
 
     ResultSet selectSQL(String sql) {
