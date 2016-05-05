@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Course;
 import Model.User;
 
 import java.sql.*;
@@ -47,15 +48,41 @@ public class ExeSQL {
         }
     }
 
+    //返回所有课程list
+    public ArrayList<Course> GetCourseList(){
+        String sql;
+        sql="SELECT *FROM course";
+        rs = selectSQL(sql);
+        ArrayList<Course> CourseList = new ArrayList<Course>();
+        try {
+            while (rs.next()){
+                Course course  = new Course();
+                course.setId(rs.getString("id"));
+                course.setName(rs.getString("name"));
+                course.setGrade(rs.getInt("grade"));
+                course.setTeacherid(rs.getString("teacherid"));
+                course.setUrl(rs.getString("url"));
+                CourseList.add(course);
+            }
+        }catch (SQLException e) {
+            System.out.println("显示时数据库出错。");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("显示出错。");
+            e.printStackTrace();
+        }
+        return CourseList;
+    }
+
     //返回所有用户的list
     public ArrayList<User> GetUserList(){
         String sql;
         sql = "select * from user";
         rs = selectSQL(sql);
         ArrayList<User> UserList = new ArrayList<User>();
-        User user = new User();
         try {
             while (rs.next()) {
+                User user = new User();
                 user.setId(rs.getString("id"));
                 user.setName(rs.getString("name"));
                 user.setPsd(rs.getString("psd"));

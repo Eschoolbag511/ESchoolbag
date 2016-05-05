@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Course;
 import Model.User;
 import View.Login;
 

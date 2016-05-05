@@ -10,7 +10,7 @@ public class Course {
 
     private String teacherid;
 
-    private int grade;
+    private Integer grade;
 
     private String url;
 
@@ -22,7 +22,7 @@ public class Course {
         this.url = url;
     }
 
-    public int getGrade() {
+    public Integer getGrade() {
         return grade;
     }
 
