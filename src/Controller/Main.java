@@ -1,6 +1,8 @@
 package Controller;
 
+import Model.Course;
 import Model.User;
+import View.Login;
 
 import java.util.ArrayList;
 
@@ -10,12 +12,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static  void main(String arg[]){
-        ExeSQL sql1=new ExeSQL();
-        sql1.connSQL();
-        ArrayList<User> userlist = new ArrayList<User>();
-        userlist = sql1.GetUserList();
-        for (User exp:userlist){
-            System.out.println(exp.getId());
-        }
+        Login login = new Login();
+        /////////////////
     }
+
 }
