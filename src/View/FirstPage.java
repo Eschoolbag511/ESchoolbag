@@ -24,7 +24,7 @@ public class FirstPage extends JFrame{
         jmb.add(UserName);
         this.setJMenuBar(jmb);
 
-        JTable table=new JTable(){ public boolean isCellEditable(int row, int column) { return false; }};
+        JTable table=new JTable(){ public boolean isCellEditable(int row, int column) { return false;}};
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("课程名称");
         tableModel.addColumn("上传人");
@@ -48,6 +48,18 @@ public class FirstPage extends JFrame{
             };
             tableModel.addRow(rowValues);
         }
+
+
+        table.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if(table.isCellSelected(table.getSelectedRow(), table.getSelectedColumn())){
+                    if(table.getSelectedRow()==0){
+                        System.out.println(table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()));
+                        JOptionPane.showMessageDialog(null, table.getValueAt(table.getSelectedRow(), table.getSelectedColumn()), "PLAIN_MESSAGE", JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
+            }
+        });
 
         JButton filter=new JButton("筛选");
         JPanel J1 =new JPanel();
